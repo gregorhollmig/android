@@ -271,7 +271,7 @@ public class PreviewImageFragment extends FileFragment {
                     }
                 }
                 mMultiView.setVisibility(View.GONE);
-                mImageView.setBackgroundColor(getResources().getColor(R.color.black));
+                mImageView.setBackgroundColor(getResources().getColor(R.color.background_color_inverse));
                 mImageView.setVisibility(View.VISIBLE);
 
             } else {
@@ -587,7 +587,7 @@ public class PreviewImageFragment extends FileFragment {
 
             mMultiView.setVisibility(View.GONE);
             if (getResources() != null) {
-                mImageView.setBackgroundColor(getResources().getColor(R.color.black));
+                mImageView.setBackgroundColor(getResources().getColor(R.color.background_color_inverse));
             }
             mImageView.setVisibility(View.VISIBLE);
 
@@ -597,7 +597,7 @@ public class PreviewImageFragment extends FileFragment {
     private LayerDrawable generateCheckerboardLayeredDrawable(LoadImage result, Bitmap bitmap) {
         Resources r = getResources();
         Drawable[] layers = new Drawable[2];
-        layers[0] = r.getDrawable(R.color.white);
+        layers[0] = r.getDrawable(R.color.background_color);
         Drawable bitmapDrawable;
 
         if (MIME_TYPE_PNG.equalsIgnoreCase(result.ocFile.getMimeType())) {
@@ -661,7 +661,7 @@ public class PreviewImageFragment extends FileFragment {
             mMultiListMessage.setText(message);
             mMultiListIcon.setImageResource(icon);
 
-            mMultiView.setBackgroundColor(Color.BLACK);
+            mMultiView.setBackgroundColor(getResources().getColor(R.color.background_color_inverse));
             mMultiListHeadline.setTextColor(getResources().getColor(R.color.standard_grey));
             mMultiListMessage.setTextColor(getResources().getColor(R.color.standard_grey));
 
@@ -736,7 +736,7 @@ public class PreviewImageFragment extends FileFragment {
                 Drawable layerOne;
 
                 if (previewImageActivity.isSystemUIVisible()) {
-                    layerOne = getResources().getDrawable(R.color.white);
+                    layerOne = getResources().getDrawable(R.color.background_color);
                 } else {
                     layerOne = getResources().getDrawable(R.drawable.backrepeat);
                 }

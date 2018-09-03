@@ -283,4 +283,6 @@ public interface AppPreferences {
 
     String getCurrentAccountName();
     void setCurrentAccountName(String accountName);
+
+    boolean getTheme();
 }
