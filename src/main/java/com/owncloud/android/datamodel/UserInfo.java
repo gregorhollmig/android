@@ -82,4 +82,8 @@ public class UserInfo {
     public void setTwitter(String twitter) {
         this.twitter = twitter;
     }
+
+    public boolean isEmpty() {
+        return phone == null && email == null && address == null && twitter == null && website == null;
+    }
 }
