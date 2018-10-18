@@ -51,9 +51,14 @@ public class UserInfoRepository {
         com.owncloud.android.datamodel.UserInfo userInfo = new com.owncloud.android.datamodel.UserInfo();
 
         userInfo.account = account.name;
-        userInfo.address = remoteUserInfo.address;
         userInfo.displayName = remoteUserInfo.displayName;
         userInfo.email = remoteUserInfo.email;
+        userInfo.phone = remoteUserInfo.phone;
+        userInfo.address = remoteUserInfo.address;
+        userInfo.website = remoteUserInfo.website;
+        userInfo.twitter = remoteUserInfo.twitter;
+        userInfo.groups = remoteUserInfo.groups;
+        // TODO quota
 
         return userInfo;
     }

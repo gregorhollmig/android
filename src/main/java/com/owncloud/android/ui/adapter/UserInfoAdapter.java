@@ -1,7 +1,6 @@
 package com.owncloud.android.ui.adapter;
 
 import android.databinding.BindingAdapter;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,13 +14,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHolder> {
-    protected List<UserInfoDetailsItem> mDisplayList;
-    @ColorInt
-    protected int mTintColor;
+    private List<UserInfoDetailsItem> mDisplayList;
 
-    public UserInfoAdapter(List<UserInfoDetailsItem> displayList, @ColorInt int tintColor) {
+    public UserInfoAdapter(List<UserInfoDetailsItem> displayList) {
         mDisplayList = displayList == null ? new LinkedList<>() : displayList;
-        mTintColor = tintColor;
     }
 
     public void setData(List<UserInfoDetailsItem> displayList) {
@@ -36,7 +32,6 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHo
         UserInfoDetailsTableItemBinding binding = UserInfoDetailsTableItemBinding.inflate(layoutInflater, parent, false);
 
         return new ViewHolder(binding);
-
     }
 
     @Override

@@ -86,6 +86,7 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.net.IDN;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -242,6 +243,9 @@ public final class DisplayUtils {
         }
     }
 
+    public static String beautifyGroups(ArrayList<String> groups) {
+        return TextUtils.join(", ", groups);
+    }
     /**
      * Converts an internationalized domain name (IDN) in an URL to and from ASCII/Unicode.
      *

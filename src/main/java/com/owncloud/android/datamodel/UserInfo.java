@@ -3,6 +3,9 @@ package com.owncloud.android.datamodel;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
+
+import java.util.ArrayList;
 
 @Entity
 public class UserInfo {
@@ -16,6 +19,7 @@ public class UserInfo {
     public String address;
     public String website;
     public String twitter;
+    public ArrayList<String> groups;
     // public Quota quota;
 
     @NonNull
@@ -84,6 +88,11 @@ public class UserInfo {
     }
 
     public boolean isEmpty() {
-        return phone == null && email == null && address == null && twitter == null && website == null;
+        return TextUtils.isEmpty(phone) && TextUtils.isEmpty(email) && TextUtils.isEmpty(address) &&
+            TextUtils.isEmpty(twitter) && TextUtils.isEmpty(website) && (groups == null || groups.size() == 0);
+    }
+
+    public ArrayList<String> getGroups() {
+        return groups;
     }
 }
