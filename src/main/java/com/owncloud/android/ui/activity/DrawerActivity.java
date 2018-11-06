@@ -319,7 +319,7 @@ public abstract class DrawerActivity extends ToolbarActivity
      */
     private void setupQuotaElement() {
         mQuotaView = (LinearLayout) findQuotaViewById(R.id.drawer_quota);
-        mQuotaProgressBar = (ProgressBar) findQuotaViewById(R.id.drawer_quota_ProgressBar);
+        mQuotaProgressBar = (ProgressBar) findQuotaViewById(R.id.drawer_quota_progressBar);
         mQuotaTextPercentage = (TextView) findQuotaViewById(R.id.drawer_quota_percentage);
         mQuotaTextLink = (TextView) findQuotaViewById(R.id.drawer_quota_link);
         ThemeUtils.colorProgressBar(mQuotaProgressBar, ThemeUtils.primaryColor(this));
@@ -842,33 +842,6 @@ public abstract class DrawerActivity extends ToolbarActivity
         }
     }
 
-    /**
-     * configured the quota to be displayed.
-     *  @param usedSpace  the used space
-     * @param totalSpace the total space
-     * @param relative   the percentage of space already used
-     * @param quotaValue {@link GetRemoteUserInfoOperation#SPACE_UNLIMITED} or other to determinate state
-     */
-    private void setQuotaInformation(long usedSpace, long totalSpace, int relative, long quotaValue) {
-        if (GetRemoteUserInfoOperation.SPACE_UNLIMITED == quotaValue) {
-            mQuotaTextPercentage.setText(String.format(
-                    getString(R.string.drawer_quota_unlimited),
-                    DisplayUtils.bytesToHumanReadable(usedSpace)));
-        } else {
-            mQuotaTextPercentage.setText(String.format(
-                    getString(R.string.drawer_quota),
-                    DisplayUtils.bytesToHumanReadable(usedSpace),
-                    DisplayUtils.bytesToHumanReadable(totalSpace)));
-        }
-
-        mQuotaProgressBar.setProgress(relative);
-
-        ThemeUtils.colorProgressBar(mQuotaProgressBar, DisplayUtils.getRelativeInfoColor(this, relative));
-
-        updateQuotaLink();
-        showQuota(true);
-    }
-
     protected void unsetAllDrawerMenuItems() {
         if (mNavigationView != null && mNavigationView.getMenu() != null) {
             Menu menu = mNavigationView.getMenu();
@@ -1008,9 +981,7 @@ public abstract class DrawerActivity extends ToolbarActivity
                     }
 
                     if (quota != null) {
-                        final long used = quota.getUsed();
-                        final long total = quota.getTotal();
-                        final int relative = (int) Math.ceil(quota.getRelative());
+
                         final long quotaValue = quota.getQuota();
 
                         runOnUiThread(new Runnable() {
@@ -1023,7 +994,10 @@ public abstract class DrawerActivity extends ToolbarActivity
                                      * it is available and calculated (> 0) or
                                      * in case of legacy servers (==QUOTA_LIMIT_INFO_NOT_AVAILABLE)
                                      */
-                                    setQuotaInformation(used, total, relative, quotaValue);
+                                    DisplayUtils.setQuotaInformation(mQuotaProgressBar, mQuotaTextPercentage,
+                                        quota, DrawerActivity.this);
+                                    updateQuotaLink();
+                                    showQuota(true);
                                 } else {
                                     /*
                                      * quotaValue < 0 means special cases like

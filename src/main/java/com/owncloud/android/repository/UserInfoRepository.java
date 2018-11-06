@@ -58,7 +58,7 @@ public class UserInfoRepository {
         userInfo.website = remoteUserInfo.website;
         userInfo.twitter = remoteUserInfo.twitter;
         userInfo.groups = remoteUserInfo.groups;
-        // TODO quota
+        userInfo.quota = remoteUserInfo.quota;
 
         return userInfo;
     }

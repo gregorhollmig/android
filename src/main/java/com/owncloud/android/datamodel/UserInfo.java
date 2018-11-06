@@ -5,6 +5,8 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.owncloud.android.lib.common.Quota;
+
 import java.util.ArrayList;
 
 @Entity
@@ -20,7 +22,7 @@ public class UserInfo {
     public String website;
     public String twitter;
     public ArrayList<String> groups;
-    // public Quota quota;
+    public Quota quota;
 
     @NonNull
     public String getAccount() {
@@ -87,12 +89,20 @@ public class UserInfo {
         this.twitter = twitter;
     }
 
-    public boolean isEmpty() {
-        return TextUtils.isEmpty(phone) && TextUtils.isEmpty(email) && TextUtils.isEmpty(address) &&
-            TextUtils.isEmpty(twitter) && TextUtils.isEmpty(website) && (groups == null || groups.size() == 0);
+    public Quota getQuota() {
+        return quota;
+    }
+
+    public void setQuota(Quota quota) {
+        this.quota = quota;
     }
 
     public ArrayList<String> getGroups() {
         return groups;
+    }
+
+    public boolean isEmpty() {
+        return TextUtils.isEmpty(phone) && TextUtils.isEmpty(email) && TextUtils.isEmpty(address) &&
+            TextUtils.isEmpty(twitter) && TextUtils.isEmpty(website) && (groups == null || groups.size() == 0);
     }
 }

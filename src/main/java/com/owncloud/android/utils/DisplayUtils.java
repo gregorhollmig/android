@@ -46,6 +46,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
@@ -64,8 +66,11 @@ import com.owncloud.android.datamodel.ArbitraryDataProvider;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.datamodel.ThumbnailsCacheManager;
 import com.owncloud.android.lib.common.OwnCloudAccount;
+import com.owncloud.android.lib.common.Quota;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.files.SearchRemoteOperation;
+import com.owncloud.android.lib.resources.files.SearchOperation;
+import com.owncloud.android.lib.resources.users.GetRemoteUserInfoOperation;
 import com.owncloud.android.ui.TextDrawable;
 import com.owncloud.android.ui.activity.FileDisplayActivity;
 import com.owncloud.android.ui.events.MenuItemClickEvent;
@@ -792,5 +797,31 @@ public final class DisplayUtils {
         } else {
             DisplayUtils.showSnackMessage(activity, error);
         }
+    }
+
+    /**
+     * configured the quota to be displayed
+     *
+     * @param quotaProgressBar    progress bar
+     * @param quotaTextPercentage text underneath progress bar
+     * @param quota               quota to use
+     */
+    static public void setQuotaInformation(ProgressBar quotaProgressBar, TextView quotaTextPercentage,
+                                           Quota quota, Activity activity) {
+        final long used = quota.getUsed();
+        final long total = quota.getTotal();
+        final int relative = (int) Math.ceil(quota.getRelative());
+
+        if (GetRemoteUserInfoOperation.SPACE_UNLIMITED == quota.getQuota()) {
+            quotaTextPercentage.setText(String.format(activity.getString(R.string.drawer_quota_unlimited),
+                bytesToHumanReadable(used)));
+        } else {
+            quotaTextPercentage.setText(String.format(activity.getString(R.string.drawer_quota),
+                bytesToHumanReadable(used), bytesToHumanReadable(total)));
+        }
+
+        quotaProgressBar.setProgress(relative);
+
+        ThemeUtils.colorProgressBar(quotaProgressBar, getRelativeInfoColor(activity, relative));
     }
 }
