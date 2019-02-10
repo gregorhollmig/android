@@ -321,7 +321,7 @@ public final class AppPreferencesImpl implements AppPreferences {
     }
 
     @Override
-    public boolean getTheme() {
+    public boolean isDarkThemeEnabled() {
         return preferences.getBoolean(PREF__DARK_THEME, false);
     }
 

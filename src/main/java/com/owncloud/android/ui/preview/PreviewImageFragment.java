@@ -597,7 +597,7 @@ public class PreviewImageFragment extends FileFragment {
     private LayerDrawable generateCheckerboardLayeredDrawable(LoadImage result, Bitmap bitmap) {
         Resources r = getResources();
         Drawable[] layers = new Drawable[2];
-        layers[0] = r.getDrawable(R.color.background_color);
+        layers[0] = r.getDrawable(R.color.bg_default);
         Drawable bitmapDrawable;
 
         if (MIME_TYPE_PNG.equalsIgnoreCase(result.ocFile.getMimeType())) {
@@ -736,7 +736,7 @@ public class PreviewImageFragment extends FileFragment {
                 Drawable layerOne;
 
                 if (previewImageActivity.isSystemUIVisible()) {
-                    layerOne = getResources().getDrawable(R.color.background_color);
+                    layerOne = getResources().getDrawable(R.color.bg_default);
                 } else {
                     layerOne = getResources().getDrawable(R.drawable.backrepeat);
                 }
