@@ -1,10 +1,6 @@
 package com.owncloud.android.ui.viewModel;
 
 import android.accounts.Account;
-import android.app.FragmentManager;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
-import android.arch.persistence.room.Room;
 
 import com.owncloud.android.MainApp;
 import com.owncloud.android.datamodel.UserInfo;
@@ -18,6 +14,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.Executors;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.room.Room;
 
 
 public class UserInfoViewModel extends ViewModel {
@@ -53,8 +54,7 @@ public class UserInfoViewModel extends ViewModel {
 
     public static void openAccountRemovalConfirmationDialog(Account account, FragmentManager fragmentManager,
                                                             boolean removeDirectly) {
-        AccountRemovalConfirmationDialog dialog = AccountRemovalConfirmationDialog.newInstance(account, removeDirectly);
-        dialog.show(fragmentManager, "dialog");
+        AccountRemovalConfirmationDialog.newInstance(account, removeDirectly).show(fragmentManager, "dialog");
     }
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)

@@ -1,8 +1,5 @@
 package com.owncloud.android.ui.adapter;
 
-import android.databinding.BindingAdapter;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,6 +9,10 @@ import com.owncloud.android.ui.components.UserInfoDetailsItem;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHolder> {
     private List<UserInfoDetailsItem> mDisplayList;

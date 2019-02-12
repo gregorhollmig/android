@@ -1,13 +1,13 @@
 package com.owncloud.android.utils;
 
-import android.arch.persistence.room.TypeConverter;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.owncloud.android.lib.common.Quota;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import androidx.room.TypeConverter;
 
 public class Converters {
     @TypeConverter

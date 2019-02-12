@@ -4,12 +4,9 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -25,6 +22,10 @@ import com.owncloud.android.utils.ThemeUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.parceler.Parcels;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import static android.content.Context.ACCOUNT_SERVICE;
 

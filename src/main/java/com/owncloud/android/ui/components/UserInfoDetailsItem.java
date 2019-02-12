@@ -1,6 +1,6 @@
 package com.owncloud.android.ui.components;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 public class UserInfoDetailsItem {
     @DrawableRes

@@ -1,13 +1,14 @@
 package com.owncloud.android.datamodel;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.owncloud.android.lib.common.Quota;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class UserInfo {

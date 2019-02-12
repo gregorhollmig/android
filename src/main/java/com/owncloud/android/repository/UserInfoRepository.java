@@ -1,9 +1,7 @@
 package com.owncloud.android.repository;
 
 import android.accounts.Account;
-import android.arch.lifecycle.LiveData;
 
-import com.owncloud.android.MainApp;
 import com.owncloud.android.datamodel.UserInfoDao;
 import com.owncloud.android.lib.common.UserInfo;
 import com.owncloud.android.lib.common.operations.RemoteOperation;
@@ -11,6 +9,8 @@ import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.resources.users.GetRemoteUserInfoOperation;
 
 import java.util.concurrent.Executor;
+
+import androidx.lifecycle.LiveData;
 
 // @Singleton // TODO re-add?
 public class UserInfoRepository {
@@ -38,7 +38,8 @@ public class UserInfoRepository {
             RemoteOperation getRemoteUserInfoOperation = new GetRemoteUserInfoOperation();
 
             // TODO how to get client better
-            RemoteOperationResult result = getRemoteUserInfoOperation.execute(account, MainApp.getAppContext());
+            Invoker invoker = new Invoker();
+            RemoteOperationResult result = invoker.invoke(account, getRemoteUserInfoOperation);
 
             if (result.isSuccess() && result.getData() != null) {
                 userInfoDao.save(parseUserInfo((UserInfo) result.getData().get(0), account));
