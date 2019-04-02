@@ -59,6 +59,6 @@ public class UserInfoViewModel extends ViewModel {
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onMessageEvent(TokenPushEvent event) {
-        PushUtils.pushRegistrationToServer();
+        PushUtils.pushRegistrationToServer(""); // todo token?
     }
 }

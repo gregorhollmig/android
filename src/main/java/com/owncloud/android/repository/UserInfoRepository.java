@@ -12,7 +12,7 @@ import java.util.concurrent.Executor;
 
 import androidx.lifecycle.LiveData;
 
-// @Singleton // TODO re-add?
+// @Singleton // TODO use dagger 2
 public class UserInfoRepository {
 
     private final UserInfoDao userInfoDao;

@@ -1,4 +1,4 @@
-package com.owncloud.android.di;
+package com.nextcloud.client.di;
 
 import android.app.Application;
 

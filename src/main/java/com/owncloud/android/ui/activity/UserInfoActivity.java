@@ -45,7 +45,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.google.gson.Gson;
 import com.nextcloud.client.di.Injectable;
 import com.nextcloud.client.preferences.AppPreferences;
 import com.owncloud.android.R;
@@ -69,6 +68,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
@@ -129,9 +129,7 @@ public class UserInfoActivity extends FileActivity implements Injectable {
 
     private Account account;
     private UserInfoAdapter adapter;
-    private @ColorRes
-    int primaryColor;
-
+    private @ColorRes int primaryColor;
 
     // TODO all operations in library: Remote prefix!
 
