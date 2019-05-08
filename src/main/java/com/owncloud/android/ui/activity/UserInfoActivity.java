@@ -48,9 +48,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.nextcloud.client.di.Injectable;
 import com.nextcloud.client.preferences.AppPreferences;
 import com.owncloud.android.R;
-import com.owncloud.android.datamodel.ArbitraryDataProvider;
-import com.owncloud.android.datamodel.PushConfigurationState;
-import com.owncloud.android.authentication.AccountUtils;
 import com.owncloud.android.datamodel.UserInfo;
 import com.owncloud.android.lib.common.utils.Log_OC;
 import com.owncloud.android.lib.resources.users.GetRemoteUserInfoOperation;
@@ -67,8 +64,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
@@ -266,7 +261,7 @@ public class UserInfoActivity extends FileActivity implements Injectable {
 
         if (userInfo == null || userInfo.isEmpty()) {
             setErrorMessageForMultiList(getString(R.string.userinfo_no_info_headline),
-                getString(R.string.userinfo_no_info_text), R.drawable.ic_user);
+                                        getString(R.string.userinfo_no_info_text));
         } else {
             if (!TextUtils.isEmpty(userInfo.getDisplayName())) {
                 fullName.setText(userInfo.getDisplayName());
