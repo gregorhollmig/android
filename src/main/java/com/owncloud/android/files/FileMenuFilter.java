@@ -263,7 +263,7 @@ public class FileMenuFilter {
             MenuItem item = menu.findItem(R.id.action_open_file_as_richdocument);
 
             if (item != null) {
-                item.setTitle(openWith + " " + productName);
+                item.setTitle(String.format(openWith, productName));
             }
 
             toShow.add(R.id.action_open_file_as_richdocument);
