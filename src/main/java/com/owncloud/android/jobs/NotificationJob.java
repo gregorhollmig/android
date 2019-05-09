@@ -93,9 +93,7 @@ public class NotificationJob extends Job {
     private static final String KEY_NOTIFICATION_ACTION_TYPE = "KEY_NOTIFICATION_ACTION_TYPE";
     private static final String PUSH_NOTIFICATION_ID = "PUSH_NOTIFICATION_ID";
     private static final String NUMERIC_NOTIFICATION_ID = "NUMERIC_NOTIFICATION_ID";
-    private static final String APP_SPREED = "spreed";
 
-    private SecureRandom randomId = new SecureRandom();
     private Context context;
     private UserAccountManager accountManager;
 
@@ -154,6 +152,7 @@ public class NotificationJob extends Job {
     }
 
     private void sendNotification(Notification notification, Account account) {
+        SecureRandom randomId = new SecureRandom();
         Intent intent = new Intent(context, NotificationsActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(KEY_NOTIFICATION_ACCOUNT, account.name);
