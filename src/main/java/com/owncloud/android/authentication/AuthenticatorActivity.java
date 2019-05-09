@@ -89,6 +89,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.nextcloud.client.account.UserAccountManager;
 import com.nextcloud.client.di.Injectable;
+import com.nextcloud.client.preferences.AppPreferences;
 import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
 import com.owncloud.android.lib.common.OwnCloudAccount;
@@ -250,6 +251,9 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
 
     @Inject
     protected UserAccountManager accountManager;
+
+    @Inject
+    protected AppPreferences preferences;
 
     /**
      * {@inheritDoc}
@@ -845,6 +849,10 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
             super.finish();
         }
 
+        // Passcode
+        PassCodeManager passCodeManager = new PassCodeManager(preferences);
+        passCodeManager.onActivityStarted(this);
+
         Uri data = intent.getData();
 
         if (data != null && data.toString().startsWith(getString(R.string.login_data_own_scheme))) {
@@ -1234,7 +1242,7 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity
 
             // show outdated warning
             if (getResources().getBoolean(R.bool.show_outdated_server_warning) &&
-                    mServerInfo.mVersion.compareTo(MainApp.OUTDATED_SERVER_VERSION) < 0) {
+                MainApp.OUTDATED_SERVER_VERSION.compareTo(mServerInfo.mVersion) >= 0) {
                 DisplayUtils.showServerOutdatedSnackbar(this);
             }
 
