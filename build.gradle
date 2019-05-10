@@ -49,7 +49,7 @@ configurations.all {
 
 ext {
     jacocoVersion = "0.8.2"
-    androidLibraryVersion = "richDocumentsProductName-SNAPSHOT"
+    androidLibraryVersion = "master-SNAPSHOT"
 
     travisBuild = System.getenv("TRAVIS") == "true"
 
