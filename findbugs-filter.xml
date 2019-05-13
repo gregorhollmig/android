@@ -17,6 +17,7 @@
         <Or>
             <Class name="~.*\.Dagger.*"/>
             <Class name="~com.nextcloud.client.di\..*_.*"/>
+            <Class name=".*Parcelable.*" />
         </Or>
 
     </Match>
