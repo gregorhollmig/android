@@ -177,6 +177,7 @@ public class FileUploader extends Service
     public static final int LOCAL_BEHAVIOUR_MOVE = 1;
     public static final int LOCAL_BEHAVIOUR_FORGET = 2;
     public static final int LOCAL_BEHAVIOUR_DELETE = 3;
+    public static final int LOCAL_BEHAVIOUR_COMPRESS = 4;
 
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;

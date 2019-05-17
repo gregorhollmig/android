@@ -294,6 +294,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.0.2'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.jetbrains:annotations:17.0.0'
+    implementation 'id.zelory:compressor:2.1.0'
 
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.9.0'
     spotbugsPlugins 'com.mebigfatguy.fb-contrib:fb-contrib:7.4.5'
