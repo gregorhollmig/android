@@ -250,6 +250,8 @@ public class FilesSyncJob extends Job {
                 return FileUploader.LOCAL_BEHAVIOUR_MOVE;
             case "LOCAL_BEHAVIOUR_DELETE":
                 return FileUploader.LOCAL_BEHAVIOUR_DELETE;
+            case "LOCAL_BEHAVIOUR_COMPRESS":
+                return FileUploader.LOCAL_BEHAVIOUR_COMPRESS;
             default:
                 return FileUploader.LOCAL_BEHAVIOUR_FORGET;
         }

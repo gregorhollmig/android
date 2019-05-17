@@ -188,6 +188,8 @@ public class SyncedFolderParcelable implements Parcelable {
                 return 1;
             case FileUploader.LOCAL_BEHAVIOUR_DELETE:
                 return 2;
+            case FileUploader.LOCAL_BEHAVIOUR_COMPRESS:
+                return 4;
         }
         return 0;
     }
@@ -202,6 +204,9 @@ public class SyncedFolderParcelable implements Parcelable {
                 break;
             case "LOCAL_BEHAVIOUR_DELETE":
                 this.mUploadAction = FileUploader.LOCAL_BEHAVIOUR_DELETE;
+                break;
+            case "LOCAL_BEHAVIOUR_COMPRESS":
+                this.mUploadAction = FileUploader.LOCAL_BEHAVIOUR_COMPRESS;
                 break;
         }
     }

@@ -73,6 +73,8 @@ import org.apache.commons.httpclient.methods.RequestEntity;
 import org.lukhnos.nnio.file.Files;
 import org.lukhnos.nnio.file.Paths;
 
+import id.zelory.compressor.Compressor;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -91,7 +93,6 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import androidx.annotation.RequiresApi;
-
 
 /**
  * Operation performing the update in the ownCloud server
@@ -965,6 +966,21 @@ public class UploadFileOperation extends SyncOperation {
                 originalFile.delete();
                 getStorageManager().deleteFileInMediaScan(originalFile.getAbsolutePath());
                 saveUploadedFile(client);
+                break;
+
+            case FileUploader.LOCAL_BEHAVIOUR_COMPRESS:
+                //originalFile.delete();
+                originalFile.getAbsolutePath();
+                try {
+                    File tempCompressedImageFile = new Compressor(mContext).setQuality(75).compressToFile(originalFile);
+                    //overwrite temp file
+                    move(tempCompressedImageFile, originalFile);
+                } catch (IOException e) {
+                    //TODO: What to do now? shouldn't  saveUploadedFile be called? but upload was successful ...
+                }
+
+                saveUploadedFile(client);
+                FileDataStorageManager.triggerMediaScan(expectedFile.getAbsolutePath());
                 break;
 
             case FileUploader.LOCAL_BEHAVIOUR_COPY:
