@@ -24,6 +24,7 @@ package com.owncloud.android.operations;
 import android.accounts.Account;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
@@ -956,6 +957,34 @@ public class UploadFileOperation extends SyncOperation {
     private void handleSuccessfulUpload(File temporalFile, File expectedFile, File originalFile,
                                         OwnCloudClient client) {
         switch (mLocalBehaviour) {
+
+            case FileUploader.LOCAL_BEHAVIOUR_COMPRESS:
+                //compress if file an image
+                if (mFile.getMimeType().startsWith("image/")){
+                    try {
+                        //compress originalFile into tempCompressedImageFile only for images from device (one direction only)
+                        File tempCompressedImageFile = new Compressor(mContext)
+                            .setMaxWidth(2500)
+                            .setMaxHeight(2500)
+                            .setQuality(77)
+                            .compressToFile(originalFile);
+                        deleteFileAndScan(originalFile);
+                        //overwrite temp file
+
+                        File targetCompressed = originalFile; //new File(originalFile.getParent() +  File.separator + "COMPRESSED_" +originalFile.getName() );
+                        move(tempCompressedImageFile, targetCompressed);
+
+                        mFile.setStoragePath(targetCompressed.getAbsolutePath());
+                        mFile.setFileLength(targetCompressed.length());
+                        saveUploadedFile(client);
+                        FileDataStorageManager.triggerMediaScan(targetCompressed.getAbsolutePath());
+                    } catch (IOException e) {
+                        //TODO: What to do now? shouldn't  saveUploadedFile be called? but upload was successful ...
+                        Log.e(TAG, "Error compressing file", e);
+                    }
+                    break;
+                }
+                //no image, fall through to LOCAL_BEHAVIOUR_FORGET!
             case FileUploader.LOCAL_BEHAVIOUR_FORGET:
             default:
                 mFile.setStoragePath("");
@@ -963,25 +992,10 @@ public class UploadFileOperation extends SyncOperation {
                 break;
 
             case FileUploader.LOCAL_BEHAVIOUR_DELETE:
-                originalFile.delete();
-                getStorageManager().deleteFileInMediaScan(originalFile.getAbsolutePath());
+                deleteFileAndScan(originalFile);
                 saveUploadedFile(client);
                 break;
 
-            case FileUploader.LOCAL_BEHAVIOUR_COMPRESS:
-                //originalFile.delete();
-                originalFile.getAbsolutePath();
-                try {
-                    File tempCompressedImageFile = new Compressor(mContext).setQuality(75).compressToFile(originalFile);
-                    //overwrite temp file
-                    move(tempCompressedImageFile, originalFile);
-                } catch (IOException e) {
-                    //TODO: What to do now? shouldn't  saveUploadedFile be called? but upload was successful ...
-                }
-
-                saveUploadedFile(client);
-                FileDataStorageManager.triggerMediaScan(expectedFile.getAbsolutePath());
-                break;
 
             case FileUploader.LOCAL_BEHAVIOUR_COPY:
                 if (temporalFile != null) {
@@ -1011,6 +1025,11 @@ public class UploadFileOperation extends SyncOperation {
                 FileDataStorageManager.triggerMediaScan(newFile.getAbsolutePath());
                 break;
         }
+    }
+
+    private void deleteFileAndScan(File deleteFile){
+        deleteFile.delete();
+        getStorageManager().deleteFileInMediaScan(deleteFile.getAbsolutePath());
     }
 
     /**

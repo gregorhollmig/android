@@ -189,7 +189,7 @@ public class SyncedFolderParcelable implements Parcelable {
             case FileUploader.LOCAL_BEHAVIOUR_DELETE:
                 return 2;
             case FileUploader.LOCAL_BEHAVIOUR_COMPRESS:
-                return 4;
+                return 3;
         }
         return 0;
     }
